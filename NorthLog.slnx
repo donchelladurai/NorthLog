@@ -1,1 +1,9 @@
-<Solution />
+<Solution>
+  <Folder Name="/UnitTests/">
+    <Project Path="NorthLog.Domain.Tests/NorthLog.Domain.Tests.csproj" />
+  </Folder>
+  <Project Path="NorthLog.Application/NorthLog.Application.csproj" />
+  <Project Path="NorthLog.Domain/NorthLog.Domain.csproj" />
+  <Project Path="NorthLog.Infrastructure/NorthLog.Infrastructure.csproj" />
+  <Project Path="NorthLog.Wpf/NorthLog.Wpf.csproj" />
+</Solution>
