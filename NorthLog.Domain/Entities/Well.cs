@@ -17,5 +17,8 @@ public class Well
     public Field Field { get; private set; } = default!;
 
     private readonly List<Wellbore> _wellbores = [];
+
+    // To the interviewers: private modifier here so wellbores can only be added through the AddWellbore() method, which enforces the domain rules around wellbore creation.
+    // I've also configured EF Core to use the private backing field to read/write instead of the public property.
     public IReadOnlyCollection<Wellbore> Wellbores => _wellbores.AsReadOnly();
 }

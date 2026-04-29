@@ -23,7 +23,7 @@ public class DailyReport
     public Guid Id { get; private set; } = Guid.NewGuid();
     public Guid WellboreId { get; private set; }
     public DateOnly ReportDate { get; private set; }
-    private decimal DepthIn { get; }
+    public decimal DepthIn { get; }
     public decimal DepthOut { get; }
     public decimal TotalOilInBarrels { get; private set; }
     public string LithologySummary { get; private set; } = default!;
