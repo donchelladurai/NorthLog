@@ -45,6 +45,6 @@ The two implementations of "submit a daily report" are the contrast worth lookin
 
 ---
 
-If you spot something that looks deliberately wrong — it probably is, and there's a comment nearby explaining why. If something looks subtly wrong without a comment — that's a real one and I'd genuinely like to know about it.
+If you spot something that looks deliberately wrong, it probably is, and there's a comment nearby explaining why. If something looks subtly wrong without a comment, that's a real one and I'd genuinely like to know about it.
 
 Thanks for taking the time to read it.
