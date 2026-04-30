@@ -7,4 +7,5 @@ public record DailyReportRow(
     decimal DepthOut,
     decimal MetersDrilled,
     decimal TotalOilInBarrels,
-    string LithologySummary);
+    string LithologySummary,
+    string Notes);

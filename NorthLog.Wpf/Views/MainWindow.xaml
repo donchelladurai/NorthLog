@@ -1,0 +1,157 @@
+﻿<Window x:Class="NorthLog.Wpf.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:NorthLog.Wpf.ViewModels"
+        Title="NorthLog — Wellsite Reporting"
+        Height="780" Width="1100"
+        Background="{StaticResource BgBrush}"
+        Foreground="{StaticResource TextBrush}"
+        FontFamily="Segoe UI" FontSize="13"
+        WindowStartupLocation="CenterScreen"
+        d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="16" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Left column: selector + form -->
+        <StackPanel Grid.Column="0">
+
+            <TextBlock Text="Wellbore" Style="{StaticResource HeadingText}" />
+
+            <ComboBox ItemsSource="{Binding Wellbores}"
+                      SelectedItem="{Binding SelectedWellbore, Mode=TwoWay}"
+                      Padding="8,6"
+                      DisplayMemberPath="DisplayName" />
+
+            <Grid Margin="0,12,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Field"      Style="{StaticResource LabelText}" />
+                    <TextBlock Text="{Binding FieldName}" />
+                    <TextBlock Text="Operator"   Style="{StaticResource LabelText}" />
+                    <TextBlock Text="{Binding OperatorName}" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Status"           Style="{StaticResource LabelText}" />
+                    <TextBlock Text="{Binding Status}" />
+                    <TextBlock Text="Kickoff depth (m)" Style="{StaticResource LabelText}" />
+                    <TextBlock Text="{Binding KickoffDepth, StringFormat=N2}" />
+                </StackPanel>
+            </Grid>
+
+            <Border Margin="0,16,0,0" Padding="16"
+                    Background="{StaticResource SurfaceBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1" CornerRadius="6">
+                <StackPanel>
+                    <TextBlock Text="Submit daily report" Style="{StaticResource HeadingText}" />
+
+                    <TextBlock Text="Report date" Style="{StaticResource LabelText}" />
+                    <DatePicker SelectedDate="{Binding ReportDate, Mode=TwoWay}" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Depth in (m)" Style="{StaticResource LabelText}" />
+                            <TextBox Text="{Binding DepthIn, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Depth out (m)" Style="{StaticResource LabelText}" />
+                            <TextBox Text="{Binding DepthOut, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                                <ColumnDefinition Width="12" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Total Oil (barrels)" Style="{StaticResource LabelText}" />
+                            <TextBox Text="{Binding TotalOil, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock Text="Lithology summary" Style="{StaticResource LabelText}" />
+                    <TextBox Text="{Binding Lithology, UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True" Height="60" TextWrapping="Wrap" />
+
+                    <TextBlock Text="Notes (optional)" Style="{StaticResource LabelText}" />
+                    <TextBox Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True" Height="50" TextWrapping="Wrap" />
+
+                    <Button Content="Submit report"
+                            Style="{StaticResource PrimaryButton}"
+                            HorizontalAlignment="Left"
+                            Margin="0,12,0,0"
+                            Command="{Binding SubmitReportCommand}" />
+
+                    <TextBlock Margin="0,10,0,0"
+                               Text="{Binding StatusMessage}"
+                               TextWrapping="Wrap">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsError}" Value="True">
+                                        <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+
+            <Button Content="Open Legacy Reports window"
+                    HorizontalAlignment="Left"
+                    Margin="0,16,0,0"
+                    Padding="10,6"
+                    Click="OpenLegacy_Click" />
+        </StackPanel>
+
+        <!-- Right column: report timeline -->
+        <DockPanel Grid.Column="2">
+            <TextBlock Text="Daily reports" Style="{StaticResource HeadingText}" DockPanel.Dock="Top" />
+
+            <DataGrid ItemsSource="{Binding Reports}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal"
+                      Background="{StaticResource SurfaceBrush}"
+                      BorderBrush="{StaticResource BorderBrush}"
+                      RowHeight="32">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date"        Binding="{Binding ReportDate}"           Width="90" />
+                    <DataGridTextColumn Header="Depth in"    Binding="{Binding DepthIn, StringFormat=N1}"  Width="80" />
+                    <DataGridTextColumn Header="Depth out"   Binding="{Binding DepthOut, StringFormat=N1}" Width="80" />
+                    <DataGridTextColumn Header="Drilled"     Binding="{Binding MetersDrilled, StringFormat=N1}"  Width="70" />
+                    <DataGridTextColumn Header="Gas"         Binding="{Binding TotalOilInBarrels, StringFormat=N1}" Width="60" />
+                    <DataGridTextColumn Header="Lithology"   Binding="{Binding LithologySummary}" Width="*" />
+                    <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</Window>

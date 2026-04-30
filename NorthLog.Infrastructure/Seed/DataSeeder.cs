@@ -36,19 +36,19 @@ public class DataSeeder(AppDbContext db) : IDataSeeder
         var b5 = w5.AddWellbore("20/6-K11", 0m);
         db.Wellbores.AddRange(b1, b2, b3, b4, b5);
 
-        b1.SubmitDailyReport(new DateOnly(2026, 4, 22), 1850m, 1980m, 9400,
+        b3.SubmitDailyReport(new DateOnly(2026, 4, 22), 1850m, 1980m, 9400,
             "Mostly grey gloop with the occasional sandy bit. Squidgy.",
             "Mudloggers reckon we may find oil. Coffee machine on rig is broken. SOS.");
 
-        b1.SubmitDailyReport(new DateOnly(2026, 4, 23), 1980m, 2110m, 8700,
+        b3.SubmitDailyReport(new DateOnly(2026, 4, 23), 1980m, 2110m, 8700,
             "Proper sand now. ",
             "Still no oil. Coffee machine still broken which is more worrying.");
 
-        b1.SubmitDailyReport(new DateOnly(2026, 4, 24), 2110m, 2225m, 7900,
+        b3.SubmitDailyReport(new DateOnly(2026, 4, 24), 2110m, 2225m, 7900,
             "Sand getting finer towards the bottom. Stuff looks like the sand trap at Trump international down south in Aberdeen.",
             "Digging deeper. Galley out of bacon rolls.");
 
-        b1.SubmitDailyReport(new DateOnly(2026, 4, 25), 2225m, 2310m, 6200,
+        b3.SubmitDailyReport(new DateOnly(2026, 4, 25), 2225m, 2310m, 6200,
             "Definitely the reservoir. Faint smell of petrol.",
             "Drilling team playing Wellerman by nathan Evans already.");
 

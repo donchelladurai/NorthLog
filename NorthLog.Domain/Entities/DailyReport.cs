@@ -2,6 +2,8 @@
 
 public class DailyReport
 {
+    internal DailyReport() { }
+
     internal DailyReport(
         Guid wellboreId, 
         DateOnly reportDate,

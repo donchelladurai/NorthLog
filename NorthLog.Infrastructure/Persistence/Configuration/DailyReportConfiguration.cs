@@ -9,6 +9,7 @@ namespace NorthLog.Infrastructure.Persistence.Configuration
         public void Configure(EntityTypeBuilder<DailyReport> b)
         {
             b.HasKey(r => r.Id);
+            b.Property(r => r.Id).ValueGeneratedNever();
             b.Property(r => r.DepthOut).HasPrecision(10, 2);
             b.Property(r => r.DepthOut).HasPrecision(10, 2);
             b.Property(r => r.TotalOilInBarrels).HasPrecision(8, 2);

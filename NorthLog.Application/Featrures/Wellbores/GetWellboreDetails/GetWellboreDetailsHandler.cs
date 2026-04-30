@@ -58,7 +58,8 @@ public static class GetWellboreDetailsHandler
                 r.DepthOut,
                 r.DepthOut - r.DepthIn,
                 r.TotalOilInBarrels,
-                r.LithologySummary))
+                r.LithologySummary,
+                r.Notes))
             .ToListAsync(cancellationToken);
 
         return new WellboreDetails(
