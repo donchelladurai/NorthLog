@@ -18,8 +18,4 @@
     <ProjectReference Include="..\NorthLog.Domain\NorthLog.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Featrures\DailyReports\" />
-  </ItemGroup>
-
 </Project>
