@@ -134,7 +134,7 @@ public partial class LegacyReportsWindow : Window
             var date = DateOnly.Parse(txtDate.Text);
             var depthIn = decimal.Parse(txtDepthIn.Text);
             var depthOut = decimal.Parse(txtDepthOut.Text);
-            var gas = decimal.Parse(txtOil.Text);
+            var oil = decimal.Parse(txtOil.Text);
             var lith = txtLithology.Text;
             var notes = txtNotes.Text;
 
@@ -172,7 +172,7 @@ public partial class LegacyReportsWindow : Window
             _db.Entry(report).Property("ReportDate").CurrentValue = date;
             _db.Entry(report).Property("DepthIn").CurrentValue = depthIn;
             _db.Entry(report).Property("DepthOut").CurrentValue = depthOut;
-            _db.Entry(report).Property("TotalOilInBarrels").CurrentValue = gas;
+            _db.Entry(report).Property("TotalOilInBarrels").CurrentValue = oil;
             _db.Entry(report).Property("LithologySummary").CurrentValue = lith;
             _db.Entry(report).Property("Notes").CurrentValue = notes;
             _db.DailyReports.Add(report);
